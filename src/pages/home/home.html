@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Inicio
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <h2>Iniciar Sesión</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <ion-list>
+           <ion-item>
+                 <ion-label floating>Nombre</ion-label>
+                 <ion-input formControlName="username" type="text"></ion-input>
+           </ion-item>
+           <ion-item *ngIf="loginForm.get('username').errors && loginForm.get('username').dirty">
+              <p *ngIf="loginForm.get('username').hasError('required')">El campo es requerido</p>
+              <p *ngIf="loginForm.get('username').hasError('pattern')">Solo letras minusculas</p>
+          </ion-item>
+
+           <ion-item>
+                 <ion-label floating>Password</ion-label>
+                 <ion-input type="password" formControlName="paswd"></ion-input>
+           </ion-item>
+           <ion-item *ngIf="loginForm.get('paswd').errors && loginForm.get('paswd').dirty">
+              <p *ngIf="loginForm.get('paswd').hasError('required')">El campo es requerido</p>
+              <p *ngIf="loginForm.get('paswd').hasError('pattern')">Formato de password inválido</p>
+          </ion-item>
+      </ion-list>
+
+      <button ion-fab bottom primary (click)="login()" [disabled]="loginForm.invalid"><ion-icon name="add"></ion-icon></button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
